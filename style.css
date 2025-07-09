@@ -39,10 +39,15 @@ th,td{
 }
 
 th{
-
+   text-transform: uppercase;
+   background-color: #111;
 }
 
 td{}
+
+td:nth-child(3) {
+    text-align: center;
+}
 
 td:nth-child(4) {
     text-align: center;
