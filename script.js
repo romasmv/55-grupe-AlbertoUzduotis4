@@ -20,7 +20,7 @@ fetch('https://stephen-king-api.onrender.com/api/books')
                 <td>${boock.Publisher}</td>
                 <td>${boock.ISBN}</td>
                 <td>${boock.Pages}</td>
-                <td>${boock.Notes[0] ? boock.Notes.join(' '):'No notes'}</td>
+                <td>${boock.Notes[0] ? boock.Notes.join(' '):'No additional notes'}</td>
             </tr>`)
 
     })
@@ -29,10 +29,21 @@ fetch('https://stephen-king-api.onrender.com/api/books')
 
 
 kingBoocksEl.addEventListener("click", e => {
-    console.log(e.target.parentElement.dataset.bookid);
-    const bid = e.target.parentElement.dataset.bookid
+    const villainsRowEl = document.getElementById('villains-row');
+    villainsRowEl && kingBoocksEl.removeChild(villainsRowEl);
+    const tr  =e.target.parentElement
+    const bid = tr.dataset.bookid
     fetch('https://stephen-king-api.onrender.com/api/book/'+bid)
     .then(res => res.json())
-    .then((data) => console.log(data))
+    .then((data) => {
+        console.log(data)
+        tr.insertAdjacentHTML('afterend',
+             `<tr id="villains-row">
+                 <td colspan="2">${data.data.Title}</td>
+                 <td colspan="4">${data.data.villains}</td>
+             </tr>`)
+    
+    })
+
     .then((err) => console.log(err));
 })
