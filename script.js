@@ -31,10 +31,11 @@ fetch('https://stephen-king-api.onrender.com/api/books')
 kingBooksEl.addEventListener("click", e => {
     const tr  =e.target.parentElement
     const villainsRowEl = document.getElementById('villains-row');
+    
     if(villainsRowEl && villainsRowEl != tr){
         kingBooksEl.removeChild(villainsRowEl)
     }
-
+    if(villainsRowEl != tr){
     const bid = tr.dataset.bookid
     fetch('https://stephen-king-api.onrender.com/api/book/'+bid)
     .then(res => res.json())
@@ -48,4 +49,5 @@ kingBooksEl.addEventListener("click", e => {
     })
 
     .then((err) => console.log(err));
+  }
 })
