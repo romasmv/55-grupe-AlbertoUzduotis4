@@ -2,6 +2,20 @@ const kingBooksEl = document.getElementById("king-books");
 const loaderEl = document.getElementById("loader");
 const tableEl = document.getElementById("table");
 
+const modalWindow = document.createElement('div');
+modalWindow.id = 'modal';
+
+const closeBtn = document.createElement('div');
+closeBtn.classList.add("close-modal");
+closeBtn.textContent = "x";
+
+const contentEl = document.createElement('div');
+contentEl.classList.add("api-content");
+
+
+modalWindow.appendChild(closeBtn);
+modalWindow.appendChild(contentEl);
+
 tableEl.classList.add("hide");
 loaderEl.classList.add("show");
 
@@ -56,9 +70,22 @@ kingBooksEl.addEventListener("click", (e) => {
               e.stopPropagation();
               e.preventDefault();
               console.log(e.target);
-            });
+
+              fetch(e.target.href)
+                 .then((res) => res.json())
+                 .then((data )=> {
+                    console.log(data)
+                    contentEl.innerHTML = `
+                    <h2>${data.data.name}</h2>
+                    <p>${data.data.name}</p>
+                    <ul>${data.data.books.map(book => `<li>${book.title}</li>`).join('')}</ul>`;
+                    document.body.appendChild(modalWindow)
+                });
+          });
           });
       })
       .catch((err) => console.log(err));
   }
 });
+
+
