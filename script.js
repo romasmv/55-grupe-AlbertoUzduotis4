@@ -70,16 +70,13 @@ kingBooksEl.addEventListener("click", (e) => {
         const links = Array.from(document.getElementsByTagName("a"));
         links &&
           links.forEach((link) => {
-            // console.log(link.href);
             link.addEventListener("click", (e) => {
               e.stopPropagation();
               e.preventDefault();
-              console.log(e.target);
 
               fetch(e.target.href)
                  .then((res) => res.json())
                  .then((data )=> {
-                    console.log(data)
                     contentEl.innerHTML = `
                     <h2>${data.data.name}</h2>
                     <p>Status: ${data.data.status}</p>
@@ -92,5 +89,11 @@ kingBooksEl.addEventListener("click", (e) => {
       .catch((err) => console.log(err));
   }
 });
+
+closeBtn.addEventListener('click',() => document.body.removeChild(blurBg));
+
+document.addEventListener('keydown',(e) => 
+  {e.key === "Escape" && document.body.removeChild(blurBg)}
+);
 
 
