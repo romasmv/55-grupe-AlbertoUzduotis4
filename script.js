@@ -2,11 +2,15 @@ const kingBooksEl = document.getElementById("king-books");
 const loaderEl = document.getElementById("loader");
 const tableEl = document.getElementById("table");
 
+const blurBg = document.createElement('div');
+blurBg.id = "blur-bg";
+
 const modalWindow = document.createElement('div');
 modalWindow.id = 'modal';
 
 const closeBtn = document.createElement('div');
 closeBtn.classList.add("close-modal");
+//closeBtn.className = 'close-modal'
 closeBtn.textContent = "x";
 
 const contentEl = document.createElement('div');
@@ -15,6 +19,7 @@ contentEl.classList.add("api-content");
 
 modalWindow.appendChild(closeBtn);
 modalWindow.appendChild(contentEl);
+blurBg.appendChild(modalWindow)
 
 tableEl.classList.add("hide");
 loaderEl.classList.add("show");
@@ -77,9 +82,9 @@ kingBooksEl.addEventListener("click", (e) => {
                     console.log(data)
                     contentEl.innerHTML = `
                     <h2>${data.data.name}</h2>
-                    <p>${data.data.name}</p>
+                    <p>Status: ${data.data.status}</p>
                     <ul>${data.data.books.map(book => `<li>${book.title}</li>`).join('')}</ul>`;
-                    document.body.appendChild(modalWindow)
+                    document.body.appendChild(blurBg)
                 });
           });
           });

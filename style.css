@@ -94,14 +94,27 @@ tbody tr:hover {
     background-color: #04550f;
 }
 
+/*Modal*/
+
+#blur-bg{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    /* filter: blur(5px); */
+    backdrop-filter: blur(5px);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 #modal {
     background-color: #000;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    padding: 30px;
+    padding: 50px;
     padding-top: 60px;
+    position: relative;
 }
 
 .close-modal {
@@ -111,8 +124,16 @@ tbody tr:hover {
     font-size: 1.5rem;
     padding: 5px 10px;
     background-color: red;
+    cursor: pointer;
+    transition: all 200ms;
+}
+
+.close-modal:hover{
+    transform: scale(1.1);
 }
 
 #modal ul {
     list-style: none;
+    margin-top: 20px;
+    
 }
